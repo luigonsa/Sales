@@ -1,0 +1,12 @@
+Base Datos
+anubis
+
+Servidor
+luigonsa
+
+usuario
+Zulu
+
+pass
+Test@2015
+
