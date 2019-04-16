@@ -10,3 +10,10 @@ Zulu
 pass
 Test@2015
 
+
+API
+https://salesapiservices.azurewebsites.net
+
+Backend
+https://salesbackendandroid.azurewebsites.net/
+
