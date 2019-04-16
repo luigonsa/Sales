@@ -5,7 +5,9 @@ namespace Sales.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Windows.Input;
     using Common.Models;
+    using GalaSoft.MvvmLight.Command;
     using Services;
     using Xamarin.Forms;
 
@@ -15,6 +17,9 @@ namespace Sales.ViewModels
     {
         //Api Services
         private ApiService ApiService;
+
+        //para refrescar en la vista
+        private bool isRefreshing;
 
         //products es propiedad privada
         private ObservableCollection<Product> products;
@@ -29,6 +34,12 @@ namespace Sales.ViewModels
 
         }
 
+        public bool IsRefreshing
+        {
+            get { return this.isRefreshing; }
+            set { this.SetValue(ref this.isRefreshing, value); }
+        }
+
         public ProductsViewModel()
         {
             this.ApiService = new ApiService();
@@ -37,15 +48,46 @@ namespace Sales.ViewModels
 
         private async void LoadProducts()
         {
-            var response = await this.ApiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/products");
+           
+            //refrescamos la pantalla
+            this.IsRefreshing = true;
+
+            //verificamos si tiene internet 
+            var connection = await this.ApiService.CheckConnection();
+            if (!connection.IsSuccess)
+            {
+                //si no hay internet mandamos el mensaje
+                this.IsRefreshing = false;
+                await Application.Current.MainPage.DisplayAlert("Error", connection.Message, "Accept");
+                return;
+            }
+
+            //url viene de los Recursos de Sales.App.Xaml
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await this.ApiService.GetList<Product>(url, "/api", "/products");
+            //var response = await this.ApiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/products");
             if (!response.IsSuccess)
             {
+                //si falla entonces ponemos el refrescar en false
+                this.IsRefreshing = false;
                 await Application.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
                 return;
             }
 
             var list = (List<Product>) response.Result;
             this.Products = new ObservableCollection<Product>(list);
+            //Si todo va bien tambien refrescamos el IsRefreshing a false
+            this.IsRefreshing = false;
         }
+
+        //propiedad solo de lectura en la vista por eso se le quita el set y su objetivo es refrescar automaticamente
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(LoadProducts);
+            }
+        }
+
     }
 }
