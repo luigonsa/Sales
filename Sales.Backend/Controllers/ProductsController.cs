@@ -14,7 +14,7 @@ namespace Sales.Backend.Controllers
 {
     public class ProductsController : Controller
     {
-        private LocalDatacontext db = new LocalDatacontext();
+        private LocalDataContext db = new LocalDataContext();
 
         // GET: Products
         public async Task<ActionResult> Index()
@@ -48,7 +48,7 @@ namespace Sales.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductId,Description,Price,IsAvailable,PublishOn")] Product product)
+        public async Task<ActionResult> Create([Bind(Include = "ProductId,Description,Remarks,imagePath,Price,IsAvailable,PublishOn")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace Sales.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductId,Description,Price,IsAvailable,PublishOn")] Product product)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductId,Description,Remarks,imagePath,Price,IsAvailable,PublishOn")] Product product)
         {
             if (ModelState.IsValid)
             {
