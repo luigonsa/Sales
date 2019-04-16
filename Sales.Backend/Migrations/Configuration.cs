@@ -2,7 +2,7 @@ namespace Sales.Backend.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Sales.Backend.Models.LocalDatacontext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Sales.Backend.Models.LocalDataContext>
     {
         public Configuration()
         {
@@ -11,7 +11,7 @@ namespace Sales.Backend.Migrations
             ContextKey = "Sales.Backend.Models.LocalDatacontext";
         }
 
-        protected override void Seed(Sales.Backend.Models.LocalDatacontext context)
+        protected override void Seed(Sales.Backend.Models.LocalDataContext context)
         {
             //  This method will be called after migrating to the latest version.
 

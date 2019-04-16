@@ -14,7 +14,7 @@ namespace Sales.Backend
         protected void Application_Start()
         {
             Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion<Models.LocalDatacontext,
+                new MigrateDatabaseToLatestVersion<Models.LocalDataContext,
                 Migrations.Configuration>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
