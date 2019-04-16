@@ -8,6 +8,7 @@ namespace Sales.ViewModels
     using System.Windows.Input;
     using Common.Models;
     using GalaSoft.MvvmLight.Command;
+    using Sales.Helpers;
     using Services;
     using Xamarin.Forms;
 
@@ -58,19 +59,21 @@ namespace Sales.ViewModels
             {
                 //si no hay internet mandamos el mensaje
                 this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert("Error", connection.Message, "Accept");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, connection.Message, Languages.Accept);
                 return;
             }
 
             //url viene de los Recursos de Sales.App.Xaml
             var url = Application.Current.Resources["UrlAPI"].ToString();
-            var response = await this.ApiService.GetList<Product>(url, "/api", "/products");
-            //var response = await this.ApiService.GetList<Product>("https://salesapiservices.azurewebsites.net", "/api", "/products");
+            var prefix = Application.Current.Resources["UrlPrefix"].ToString();
+            var controller = Application.Current.Resources["UrlProductsController"].ToString();
+            var response = await this.ApiService.GetList<Product>(url, prefix, controller);
+            
             if (!response.IsSuccess)
             {
                 //si falla entonces ponemos el refrescar en false
                 this.IsRefreshing = false;
-                await Application.Current.MainPage.DisplayAlert("Error", response.Message, "Accept");
+                await Application.Current.MainPage.DisplayAlert(Languages.Error, response.Message, Languages.Accept);
                 return;
             }
 

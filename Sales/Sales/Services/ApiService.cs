@@ -8,8 +8,7 @@ namespace Sales.Services
     using Newtonsoft.Json;
     using Plugin.Connectivity;
     using Sales.Common.Models;
-
-
+    using Sales.Helpers;
 
     public class ApiService
     {
@@ -23,7 +22,7 @@ namespace Sales.Services
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "Por Favor Conecte su Internet en configuracion",
+                    Message = Languages.TurnOnInternet,
                 };
             }
 
@@ -33,7 +32,7 @@ namespace Sales.Services
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = "No tiene conexion a internet",
+                    Message = Languages.NoInternet,
                 };
             }
 
