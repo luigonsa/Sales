@@ -2,8 +2,10 @@
 namespace Sales.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Newtonsoft.Json;
     using Sales.Common.Models;
 
 
@@ -40,7 +42,13 @@ namespace Sales.Services
                 //si todo esta bien o no se cumple la negacion
                 //serializamos o convertimos en json
                 //samos la libreria que agregamos en el nuget del proyecto
-                var list = JsonConvert.DeserializeObject<List<T>>(answer)
+                var list = JsonConvert.DeserializeObject<List<T>>(answer);
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Result = list,
+                };
 
 
 
