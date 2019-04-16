@@ -22,7 +22,9 @@ namespace Sales.Common.Models
 
         public override string ToString()
         {
+            //retornamos el string que deseamos
             return this.Description;
+
         }
 
 
