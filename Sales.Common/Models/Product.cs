@@ -33,6 +33,20 @@ namespace Sales.Common.Models
         [DataType(DataType.Date)]
         public DateTime PublishOn { get; set; }
 
+        public string ImageFullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(this.imagePath))
+                {
+                    return "noproduct";
+                }
+                //substring es para eliminar ~ de la direccion de la imagen
+                return $"https://salesbackendandroid.azurewebsites.net/{this.imagePath.Substring(1)}";
+
+            }
+        }
+
         public override string ToString()
         {
             //retornamos el string que deseamos
