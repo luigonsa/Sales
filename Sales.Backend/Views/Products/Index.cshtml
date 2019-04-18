@@ -41,7 +41,11 @@
             @Html.DisplayFor(modelItem => item.Remarks)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.imagePath)
+            @if (!string.IsNullOrEmpty(item.imagePath))
+            {
+                <img src="@Url.Content(item.imagePath)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+            }
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)
@@ -53,8 +57,8 @@
             @Html.DisplayFor(modelItem => item.PublishOn)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }, new { @class = "btn btn-warning" }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId } , new { @class = "btn btn-info" }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId } , new { @class = "btn btn-info" })
             @Html.ActionLink("Delete", "Delete", new { id=item.ProductId } , new { @class = "btn btn-danger" })
         </td>
     </tr>
