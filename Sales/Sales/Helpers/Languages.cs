@@ -39,7 +39,7 @@
             get { return Resource.TurnOnInternet; }
         }
 
-        /* public static string AddProduct
+         public static string AddProduct
         {
             get { return Resource.AddProduct; }
         }
@@ -74,7 +74,7 @@
             get { return Resource.Save; }
         }
 
-        public static string ChangeImage
+      /*  public static string ChangeImage
         {
             get { return Resource.ChangeImage; }
         }

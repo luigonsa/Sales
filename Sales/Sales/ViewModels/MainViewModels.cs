@@ -15,6 +15,9 @@ namespace Sales.ViewModels
 
         public ProductsViewModel Products { get; set; }
 
+
+        public AddProductViewModel AddProduct { get; set; }
+
         public MainViewModels()
         {
             this.Products = new ProductsViewModel();
